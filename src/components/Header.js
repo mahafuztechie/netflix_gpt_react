@@ -1,17 +1,30 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import {auth} from '../utils/firebase'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser, removeUser } from '../utils/userSlice';
-import { LOGO } from '../utils/constants';
+import { LOGO, SUPPORTED_LANGUAGES } from '../utils/constants';
+import { toggleGptSearchView } from '../utils/gptSlice';
+import { changeLanguage } from '../utils/configSlice';
 
 const Header = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((store) => store.user)
-  
+  const language = useRef("en");
+  const user = useSelector((store) => store.user);
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
+
+  const handleGptSearchClick = () => {
+    //toggle gpt search
+    dispatch(toggleGptSearchView());
+  }
+  const handleLanguageChange = () => {
+    //toggle gpt search
+    console.log(language.current.value);
+    dispatch(changeLanguage(language.current.value));
+  }
   const handleSignOut = () => {
     signOut(auth).then(() => {
       // Sign-out successful.
@@ -42,7 +55,14 @@ const Header = () => {
         <img className="w-44" src={LOGO} 
         alt="netflix-logo"/>
         { user && (<div className='flex p-2'>
-          <img className="w-12 h-12" src={user?.photoURL} 
+         {showGptSearch &&
+          <select ref={language} onClick={handleLanguageChange} className='p-2 bg-gray-900 text-white my-1 h-12 rounded-lg'>
+              {SUPPORTED_LANGUAGES.map(lang => 
+              <option value={lang.identifier}>{lang.name}</option>
+              )}
+          </select>}
+          <button onClick={handleGptSearchClick} className='py-2 px-4 mx-4 bg-purple-500 text-white rounded-lg h-12'>{showGptSearch ? "Home Page" : "GPT Search"}</button>
+          <img className="w-12 h-12 rounded-lg" src={user?.photoURL} 
           alt="usericon"/>
           <button onClick={handleSignOut} className='font-bold text-white ml-2'>Sign Out</button>
         </div>)}

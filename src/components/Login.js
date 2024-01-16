@@ -6,6 +6,7 @@ import {auth} from '../utils/firebase'
 import usericon from '../assets/Images/user-icon.jpg'
 import { useDispatch } from 'react-redux'
 import { addUser } from '../utils/userSlice'
+import { BG_URL } from '../utils/constants'
 
  
 const Login = () => {
@@ -82,7 +83,7 @@ const Login = () => {
     <div>
         <Header/>
         <div className="absolute w-screen">
-            <img src="https://assets.nflxext.com/ffe/siteui/vlv3/df6621a3-890c-4ca0-b698-90bd5152f3d1/20a59be7-7062-4991-bca0-805e9a7f2716/IN-en-20240107-trifectadaily-perspective_alpha_website_large.jpg"
+            <img src={BG_URL}
             alt="bg-img"/>
         </div>
         <form onSubmit={(e)=>{e.preventDefault()}}
