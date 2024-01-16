@@ -58,7 +58,7 @@ const Header = () => {
          {showGptSearch &&
           <select ref={language} onClick={handleLanguageChange} className='p-2 bg-gray-900 text-white my-1 h-12 rounded-lg'>
               {SUPPORTED_LANGUAGES.map(lang => 
-              <option value={lang.identifier}>{lang.name}</option>
+              <option key={lang.identifier} value={lang.identifier}>{lang.name}</option>
               )}
           </select>}
           <button onClick={handleGptSearchClick} className='py-2 px-4 mx-4 bg-purple-500 text-white rounded-lg h-12'>{showGptSearch ? "Home Page" : "GPT Search"}</button>

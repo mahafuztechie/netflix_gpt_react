@@ -14,8 +14,20 @@
     }
   }
   body {
+    margin: 0;
     overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    /* "thin" or "auto" depending on your preference */
   }
   
+  body::-webkit-scrollbar {
+    width: 0.1em;
+     /* Adjust as needed */
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background-color: #888; /* Adjust as needed */
+  }
   
   
