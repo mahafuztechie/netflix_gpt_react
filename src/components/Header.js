@@ -51,10 +51,10 @@ const Header = () => {
       return () => unSubscribe();
 },[])
   return (
-    <div className='absolute flex justify-between w-screen px-8 py-2 bg-gradient-to-b from-black z-10'>
-        <img className="w-44" src={LOGO} 
+    <div className='absolute flex flex-col md:flex-row md:justify-between w-screen px-8 py-2 bg-gradient-to-b from-black z-10'>
+        <img className="w-44 mx-auto md:mx-0" src={LOGO} 
         alt="netflix-logo"/>
-        { user && (<div className='flex p-2'>
+        { user && (<div className='flex p-2 justify-between'>
          {showGptSearch &&
           <select ref={language} onClick={handleLanguageChange} className='p-2 bg-gray-900 text-white my-1 h-12 rounded-lg'>
               {SUPPORTED_LANGUAGES.map(lang => 
@@ -62,9 +62,9 @@ const Header = () => {
               )}
           </select>}
           <button onClick={handleGptSearchClick} className='py-2 px-4 mx-4 bg-purple-500 text-white rounded-lg h-12'>{showGptSearch ? "Home Page" : "GPT Search"}</button>
-          <img className="w-12 h-12 rounded-lg" src={user?.photoURL} 
+          <img className="w-12 h-12 rounded-lg hidden md:block" src={user?.photoURL} 
           alt="usericon"/>
-          <button onClick={handleSignOut} className='font-bold text-white ml-2'>Sign Out</button>
+          <button onClick={handleSignOut} className='font-bold text-white ml-2'>(Sign Out)</button>
         </div>)}
     </div>
    
